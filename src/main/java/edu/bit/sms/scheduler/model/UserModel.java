@@ -3,11 +3,15 @@ package edu.bit.sms.scheduler.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "usernew")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class UserModel {
+public class UserModel implements Serializable {  /* The specification says you have to, but some JPA providers
+                                                     do not enforce this. Hibernate as JPA provider does not enforce
+                                                     this, but it can fail somewhere deep in its stomach with
+                                                     ClassCastException, if Serializable has not been implemented.*/
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name="user_id")
@@ -18,8 +22,10 @@ public class UserModel {
     @Column(name="user_email")
     private String email;
 
-    public UserModel() {
-    }
+    public UserModel(){}/* Default constructor is required to have Hibernate initialize
+                           the entity; private is allowed but package private (or public)
+                           visibility is required for runtime proxy generation and efficient
+                           data retrieval without bytecode instrumentation.*/
 
     public Long getId() {
         return id;

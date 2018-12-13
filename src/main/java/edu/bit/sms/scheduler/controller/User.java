@@ -11,6 +11,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping(path = "/usernew")
+@CrossOrigin(origins = "http://localhost:4200")
 public class User {
 
     //@AUtowired tells that userService is a dependancy injection
@@ -24,18 +25,18 @@ public class User {
     }
 
     //model should be wrapped here
-    @PostMapping("/saveUser")
+    @PostMapping("/allUsers/saveUser")
     public String saveUser(@RequestBody UserModel Userdata){
 
         return newUserService.saveUserr(Userdata);
 
     }
 
-    @PutMapping("/update")
+    @PutMapping("/allUsers/update")
     public String updateUser(@RequestBody  UserModel newusermodel){
         return newUserService.updateUser(newusermodel);
     }
-    @PutMapping("/updateone/{id}")
+    @PutMapping("/allUsers/updateone/{id}")
     public UserModel updateUserone(@PathVariable(value = "id") Long noteId,
                                 @RequestBody UserModel newusermodel){
         UserModel userModel=newUserService.findById(noteId);
@@ -47,13 +48,13 @@ public class User {
 
 
 
-    @GetMapping("/finduser/{id}")
+    @GetMapping("/allUsers/finduser/{id}")
     public UserModel getUserById(@PathVariable(value = "id") Long noteId){//@PathVariable Long id
 
         return newUserService.findById(noteId);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/allUsers/delete/{id}")
     public void deleteUserById(@PathVariable Long id){
 
         newUserService.deleteUser(id);
