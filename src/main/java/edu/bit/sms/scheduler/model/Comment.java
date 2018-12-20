@@ -21,7 +21,10 @@ public class Comment {
     /*With this solution a unidirectional relationship from the child to the parent is enough to automatically
     remove all children. This solution does not need any listeners etc. Also a query like DELETE FROM Parent WHERE id = 1
     will remove the children.*/
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    /*here we use @jsonignore bcz we dont want to serialize n deserialize the post property,
+    * post property just used only inside comment module/entity*/
+    //in manytoone or manytomany relations the fetchtype should lazy,if relation is onetoone then fetchtype is eager...
+    @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "post_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
