@@ -19,10 +19,7 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @GetMapping("/testposts")
-    public String test(){
-        return "posts works";
-    }
+
 
     @GetMapping("/allposts")
     public List<Post>  allPosts(){
