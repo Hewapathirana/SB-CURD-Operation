@@ -34,6 +34,10 @@ public class CommentController {
     @Autowired
     private CommentRepository commentRepository;
 
+    //should be remove
+    @Autowired
+    private PostRepository postRepository;
+
 
 
     @GetMapping("/posts/{postId}/comments")
@@ -59,6 +63,26 @@ public class CommentController {
           commentService.saveComment(comment);
        return comment;
     }
+
+
+    @PutMapping("/posts/{postId}/comments/{commentId}")
+    public Comment updateComment(@PathVariable (value = "postId") Long postId,
+                                 @PathVariable (value = "commentId") Long commentId,
+                                 @Valid @RequestBody Comment commentRequest) {
+        if(!postRepository.existsById(postId)) {
+            System.out.println(("PostId " + postId + " not found"));
+        }
+      else if(postRepository.existsById(postId)){
+            Comment commentupdate=commentService.findCommentById(commentId);
+            commentupdate.setText(commentRequest.getText());
+            commentService.saveComment(commentupdate);
+            return commentupdate;
+        }
+
+        return null;
+    }
+
+
 
 
 
