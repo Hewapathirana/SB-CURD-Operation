@@ -31,4 +31,8 @@ public interface CommentService {
 
 
     List<Comment> findCommentsByPostIdservice(Long pstId);
+
+
+    public boolean isCommentAvailable(Long id);    //to check whether is comment available....
+
 }

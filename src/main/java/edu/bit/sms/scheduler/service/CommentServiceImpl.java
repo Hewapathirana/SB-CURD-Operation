@@ -66,4 +66,15 @@ public class CommentServiceImpl implements CommentService {
         //return  userRepository.findAll();
         return allpostcommentsshere;
     }
+
+
+    @Override
+    public boolean isCommentAvailable(Long id) {
+
+        if(commentRepository.existsById(id)){
+            return true;
+        }
+        else
+        return false;
+    }
 }

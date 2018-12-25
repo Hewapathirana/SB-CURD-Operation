@@ -52,6 +52,7 @@ public class PostController {
     public void deletePostById(@PathVariable Long id){
 
         postService.deletePost(id);
+        System.out.println("deleted post =" + id);
     }
 
 }

@@ -56,4 +56,14 @@ public class PostServiceImpl implements PostService {
         postRepository.deleteById(id);
     }
 
+
+    @Override
+    public boolean isPostAvailable(Long id) {
+
+        if(postRepository.existsById(id)){
+            return true;
+        }
+        else
+        return false;
+    }
 }

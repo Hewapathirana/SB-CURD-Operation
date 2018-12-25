@@ -22,4 +22,7 @@ public interface PostService {
 
 
     void deletePost(Long id);
+
+
+    public boolean isPostAvailable(Long id);    //to check whether is post available....
 }
