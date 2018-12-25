@@ -2,8 +2,11 @@ package edu.bit.sms.scheduler.controller;
 
 
 import edu.bit.sms.scheduler.model.Post;
+import edu.bit.sms.scheduler.repository.CommentRepository;
+import edu.bit.sms.scheduler.service.interfaces.CommentService;
 import edu.bit.sms.scheduler.service.interfaces.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,7 +21,10 @@ public class PostController {
 
     @Autowired
     private PostService postService;
-
+    @Autowired
+    private CommentService commentService;
+    @Autowired
+    private CommentRepository commentRepository;//remove
 
 
     @GetMapping("/allposts")
@@ -50,8 +56,10 @@ public class PostController {
 
     @DeleteMapping("/allUsers/delete/{id}")
     public void deletePostById(@PathVariable Long id){
-
+        commentService.deleteAllCommentsForPostId(id);
+        //commentRepository.deleteByPostId(id);
         postService.deletePost(id);
+
         System.out.println("deleted post =" + id);
     }
 

@@ -35,4 +35,6 @@ public interface CommentService {
 
     public boolean isCommentAvailable(Long id);    //to check whether is comment available....
 
+
+    public String deleteAllCommentsForPostId(Long id);
 }
