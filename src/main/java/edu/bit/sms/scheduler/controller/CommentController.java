@@ -83,7 +83,23 @@ public class CommentController {
     }
 
 
+    @DeleteMapping("/posts/{postId}/comments/{commentId}")
+    public String deletePostById(@PathVariable (value = "postId") Long postId,
+                               @PathVariable (value = "commentId") Long commentId){
+        if(!postRepository.existsById(postId)) {
+            System.out.println(("PostId " + postId + " not found"));
+        }
 
+        else if(!commentRepository.existsById(commentId)){
+            System.out.println(("PostId " + commentId + " not found"));
+       }
+
+        else if (postRepository.existsById(postId) && commentRepository.existsById(commentId) )
+        { commentService.deleteComment(commentId);
+            System.out.println("Deleted succesfully = " +commentId );
+        }
+          return "delete restpoint";
+    }
 
 
 
