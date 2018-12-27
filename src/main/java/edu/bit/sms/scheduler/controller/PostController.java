@@ -34,7 +34,10 @@ public class PostController {
 
     @PostMapping("/saveposts")
     public String savePosts(@RequestBody Post post){
+        System.out.println("saveposts answerd");
         return postService.savePost(post);
+
+
     }
 
     @PutMapping("/updatepost/{id}")
