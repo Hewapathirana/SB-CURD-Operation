@@ -36,6 +36,7 @@ public class User {
     public String updateUser(@RequestBody  UserModel newusermodel){
         return newUserService.updateUser(newusermodel);
     }
+
     @PutMapping("/allUsers/updateone/{id}")
     public UserModel updateUserone(@PathVariable(value = "id") Long noteId,
                                 @RequestBody UserModel newusermodel){

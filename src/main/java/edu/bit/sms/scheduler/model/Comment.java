@@ -26,6 +26,15 @@ public class Comment {
     /*here we use @jsonignore bcz we dont want to serialize n deserialize the post property,
     * post property just used only inside comment module/entity*/
     //in manytoone or manytomany relations the fetchtype should lazy,if relation is onetoone then fetchtype is eager...
+    /**
+     * Both is used to prevent a null value, but if you mind that null should be blocked in ..
+     * The database layer (and you want to generate the schema using JPA) --> use @Column(nullable=false)
+     * The runtime (and before contacting the database)--> use optional=false (much faster than the first checking).
+     * If you want both abilities, use them both
+     * optional=false is a runtime instruction. The primary functional thing it does is related to Lazy Loading.
+     * You can't lazy load a non-collection mapped entity unless you remember to set optional=false
+     * (because Hibernate doesn't know if there should be a proxy there or a null,
+     * unless you tell it nulls are impossible, so it can generate a proxy.)*/
     @ManyToOne(fetch = FetchType.LAZY,optional = false)
     @JoinColumn(name = "post_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
